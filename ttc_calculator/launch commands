@@ -1,0 +1,15 @@
+#TTC
+
+ros2 launch dbw_ford_can dbw.launch.xml
+
+ros2 topic pub --once /vehicle/enable std_msgs/msg/Empty "{}"	# Terminal 2
+
+ros2 launch ouster_ros sensor.launch.xml sensor_hostname:=os-992315000023.local # term 3
+
+# TTC Ouster / Dataspeed 
+ros2 launch ttc_calculator ttc.launch.py invert_forward:=true
+
+ros2 launch ttc_calculator ttc.launch.py yaw_offset_deg:=180.0 marker_use_rotated:=true
+
+ros2 launch ttc_calculator ttc.launch.py yaw_offset_deg:=0.0 marker_use_rotated:=false
+
